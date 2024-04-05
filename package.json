@@ -1,0 +1,10 @@
+{
+  "name": "rekt-jsx",
+  "type": "module",
+  "devDependencies": {
+    "@aldinh777/reactive": "^0.33.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
