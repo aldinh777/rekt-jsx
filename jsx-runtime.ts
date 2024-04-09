@@ -14,6 +14,7 @@ export interface ServerContext extends RektContext {
     id: string
     connectionId: string
     request: Request
+    data: any
     setHeader(name: string, value: string): void
     setStatus(code: number, statusText?: string): void
 }
