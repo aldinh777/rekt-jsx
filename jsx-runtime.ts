@@ -1,5 +1,5 @@
 import type { State } from '@aldinh777/reactive'
-import type { WatchableList } from '@aldinh777/reactive/collection/list.js'
+import type { WatchableList } from '@aldinh777/reactive/list/watchable.js'
 import type { Unsubscribe } from '@aldinh777/reactive/utils/subscription.js'
 
 export interface RektContext {

@@ -1,13 +1,13 @@
 {
-    "name": "@aldinh777/rekt-jsx",
-    "description": "simple jsx implementation to be used for the rekt framework",
-    "type": "module",
-    "author": "aldinh777",
-    "devDependencies": {
-        "@aldinh777/reactive": "^0.33.1"
-    },
-    "peerDependencies": {
-        "typescript": "^5.0.0"
-    },
-    "version": "0.1.1"
+  "name": "@aldinh777/rekt-jsx",
+  "description": "simple jsx implementation to be used for the rekt framework",
+  "type": "module",
+  "author": "aldinh777",
+  "devDependencies": {
+    "@aldinh777/reactive": "^0.34.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "version": "0.1.1"
 }
