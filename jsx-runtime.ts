@@ -2,6 +2,14 @@ import type { State } from '@aldinh777/reactive'
 import type { WatchableList } from '@aldinh777/reactive/list/watchable.js'
 import type { Unsubscribe } from '@aldinh777/reactive/utils/subscription.js'
 
+declare global {
+    namespace JSX {
+        interface IntrinsicElements {
+            [elemName: string]: any
+        }
+    }
+}
+
 export interface RektContext {
     onMount(mountHandler: () => Unsubscribe | void): void
     onDismount(dismountHandler: Unsubscribe): void
