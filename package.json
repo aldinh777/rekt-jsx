@@ -4,7 +4,7 @@
   "type": "module",
   "author": "aldinh777",
   "devDependencies": {
-    "@aldinh777/reactive": "^0.34.1"
+    "@aldinh777/reactive": "^0.35.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
