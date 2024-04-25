@@ -1,7 +1,7 @@
 {
   "name": "@aldinh777/rekt-jsx",
   "description": "simple jsx implementation to be used for the rekt framework",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "jsx-runtime.js",
   "types": "jsx-runtime.d.ts",
   "type": "module",
