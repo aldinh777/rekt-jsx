@@ -10,44 +10,37 @@ declare global {
     }
 }
 
-export interface RektContext {
+export interface Context {
     onMount(mountHandler: () => Unsubscribe | void): void
     onDismount(dismountHandler: Unsubscribe): void
     dismount(): void
-    setTimeout(ms: number, handler: () => any): any
-    setInterval(ms: number, handler: () => any): any
 }
 
-export interface ServerContext extends RektContext {
-    id: string
+export interface ServerContext extends Context {
+    contextId: string
     connectionId: string
     request: Request
-    data: any
-    setHeader(name: string, value: string): void
-    setStatus(code: number, statusText?: string): void
+    responseData: ResponseInit
+    params: Record<string, string | undefined>
 }
 
-export interface RektProps {
-    [prop: string]: any
-    children?: RektNode | RektNode[]
+export interface Props extends Record<string, any> {
+    children?: Node | Node[]
 }
 
-interface RektElement {
-    tag: string | RektComponent
-    props: RektProps
+interface Element {
+    tag: string | Component
+    props: Props
 }
 
-export type RektNode = string | State | WatchableList<any> | RektElement
-export type RektComponent = (
-    props: RektProps,
-    context: RektContext
-) => Promise<RektNode | RektNode[]> | RektNode | RektNode[]
+export type Node = string | State | WatchableList<any> | Element
+export type Component = (props: Props, context: Context) => Promise<Node | Node[]> | Node | Node[]
 
-export function jsx(tag: string | RektComponent, props: any): RektElement {
+export function jsx(tag: string | Component, props: any): Element {
     return { tag, props }
 }
 
-export const Fragment: RektComponent = (props) => props.children || []
+export const Fragment: Component = (props) => props.children || []
 
 export function createContext() {
     const unsubscribers: Unsubscribe[] = []
@@ -65,30 +58,6 @@ export function createContext() {
             for (const unsubscribe of unsubscribers.splice(0)) {
                 unsubscribe()
             }
-        },
-        setTimeout(ms: number, handler: () => any) {
-            this.onMount(() => {
-                const timeout = setTimeout(() => {
-                    try {
-                        handler()
-                    } catch (error) {
-                        console.error(error)
-                    }
-                }, ms)
-                return () => clearTimeout(timeout)
-            })
-        },
-        setInterval(ms: number, handler: () => any) {
-            this.onMount(() => {
-                const interval = setInterval(() => {
-                    try {
-                        handler()
-                    } catch (error) {
-                        console.error(error)
-                    }
-                }, ms)
-                return () => clearInterval(interval)
-            })
         }
     }
 }
