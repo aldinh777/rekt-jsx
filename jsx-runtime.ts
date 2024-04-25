@@ -17,11 +17,15 @@ export interface Context {
 }
 
 export interface ServerContext extends Context {
-    contextId: string
-    connectionId: string
+    _id: string
+    _cid: string
+    params: Record<string, string>
     request: Request
-    responseData: ResponseInit
-    params: Record<string, string | undefined>
+    responseData: {
+        headers: Record<string, string>
+        status: number
+        statusText: string
+    }
 }
 
 export interface Props extends Record<string, any> {
