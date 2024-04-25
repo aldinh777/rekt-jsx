@@ -1,13 +1,15 @@
 {
   "name": "@aldinh777/rekt-jsx",
   "description": "simple jsx implementation to be used for the rekt framework",
+  "version": "0.1.5",
+  "main": "jsx-runtime.js",
+  "types": "jsx-runtime.d.ts",
   "type": "module",
   "author": "aldinh777",
   "devDependencies": {
-    "@aldinh777/reactive": "^0.35.0"
+    "@aldinh777/reactive": "^0.35.1"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
-  },
-  "version": "0.1.5"
+  }
 }
