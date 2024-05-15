@@ -1,5 +1,5 @@
 import type { State } from '@aldinh777/reactive'
-import { computed, computedStatic, setEffect, setEffectStatic } from '@aldinh777/reactive/utils'
+import { computed, setEffect } from '@aldinh777/reactive/utils'
 import { Context } from './jsx-runtime.js'
 
 export function asyncUtils(context: Context, onError?: (error: any) => any) {
@@ -34,25 +34,19 @@ export function reactiveUtils(context: Context, onError?: (error: any) => any) {
         }
     }
     return {
-        computed<T>(computer: () => T) {
+        computed<T, U>(computer: (...values: T[]) => U, states?: State<T>[]) {
             const wrapperComputer = wrapError(computer)
-            const state = computed(wrapperComputer)
+            const state = states ? computed(wrapperComputer, states) : computed(wrapperComputer)
             context.onDismount(() => state.stop())
             return state
         },
-        computedStatic<T, U>(states: State<T>[], computer: (...values: T[]) => U) {
-            const wrappedComputer = wrapError(computer)
-            const state = computedStatic(states, wrappedComputer)
-            context.onDismount(() => state.stop)
-            return state
-        },
-        setEffect(effect: () => any) {
+        setEffect<T>(effect: (...values: T[]) => any, states?: State<T>[]) {
             const wrappedEffect = wrapError(effect)
-            context.onDismount(setEffect(wrappedEffect))
-        },
-        setEffectStatic<T>(states: State<T>[], effect: (...values: T[]) => any) {
-            const wrappedEffect = wrapError(effect)
-            context.onDismount(setEffectStatic(states, wrappedEffect))
+            if (states) {
+                context.onDismount(setEffect(wrappedEffect, states))
+            } else {
+                context.onDismount(setEffect(wrappedEffect))
+            }
         }
     }
 }
